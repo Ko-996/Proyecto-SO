@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>Proyecto planificacion de procesos</title>
@@ -12,25 +9,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-
-
 </head>
-
 <body>
-
     <header>
         <div>
             <img src="logo.png" class="logo">
             <li class="nombre">Kevin Rafael Ovalle Lemus 1490-21-3972</li>
-
-
         </div>
-
     </header>
-
-
     <main>
-
         <body>
             <h1 class="titulo"><strong>Planificación de Procesos</strong></h1>
 
@@ -92,33 +79,25 @@
                     </tbody>
                 </table>
             </div>
-
             <div class="bt">
                 <button class="btn" onclick="planificarProcesos()">Prioridad al tiempo restante mas corto</button>
                 <button class="btn" onclick="ejecutarRoundRobin()">Round Robin</button>
-
             </div>
             <div class="bt"><button class="btn" onclick="copiarTiemposALaSegundaPagina()">Tabla de promedios</button>
             </div>
             <h2 class="titulo1">-Resultados de la planificación de Procesos</h2>
-
             <div id="chart"></div>
-
             <script>
-
                 const ejecucionLog = [];
-
                 function planificarProcesos() {
                     const procesosTable = document.querySelectorAll("tbody tr");
                     const procesos = [];
                     let tiempoActual = 0;
                     let planificacion = [];
                     const colores = ["red", "blue", "green", "purple", "orange", "pink", "brown"];
-
                     procesosTable.forEach((fila, index) => {
                         const tiempoLlegada = parseInt(fila.cells[1].querySelector("input").value);
                         const tiempoCPU = parseInt(fila.cells[2].querySelector("input").value);
-
                         if (!isNaN(tiempoLlegada) && !isNaN(tiempoCPU) && tiempoLlegada >= 0 && tiempoLlegada <= 20 && tiempoCPU >= 0 && tiempoCPU <= 20) {
                             const proceso = {
                                 nombre: String.fromCharCode(65 + index),
@@ -130,7 +109,6 @@
                             procesos.push(proceso);
                         }
                     });
-
                     while (procesos.length > 0) {
                         const procesoActual = obtenerProcesoMasCorto(procesos, tiempoActual);
                         if (procesoActual === null) {
@@ -143,7 +121,6 @@
                                 inicio: tiempoActual,
                                 fin: tiempoActual + 1
                             });
-
                             planificacion.push({ tiempo: tiempoActual, proceso: procesoActual.nombre, color: procesoActual.color });
                             if (procesoActual.restante === 0) {
                                 procesos.splice(procesos.indexOf(procesoActual), 1);
@@ -151,12 +128,9 @@
                             tiempoActual++;
                         }
                     }
-
                     representarGraficamente(planificacion);
-
                     mostrarRegistroDeEjecucion();
                 }
-
                 function obtenerProcesoMasCorto(procesos, tiempoActual) {
                     let procesoMasCorto = null;
                     for (const proceso of procesos) {
@@ -168,7 +142,6 @@
                     }
                     return procesoMasCorto;
                 }
-
                 function mostrarRegistroDeEjecucion() {
                     const filasTabla = document.querySelectorAll("table tbody tr");
 
@@ -186,18 +159,13 @@
                         }
                     });
                 }
-
-
                 function ejecutarRoundRobin() {
                     const quantum = 2;
-
-
                     const procesosTable = document.querySelectorAll("tbody tr");
                     const procesos = [];
                     let tiempoActual = 0;
                     let planificacion = [];
                     const colores = ["red", "blue", "green", "purple", "orange", "pink", "brown"];
-
                     procesosTable.forEach((fila, index) => {
                         const tiempoLlegada = parseInt(fila.cells[1].querySelector("input").value);
                         const tiempoCPU = parseInt(fila.cells[2].querySelector("input").value);
@@ -213,7 +181,6 @@
                             procesos.push(proceso);
                         }
                     });
-
                     while (procesos.length > 0) {
                         const procesoActual = procesos[0];
                         if (procesoActual.llegada <= tiempoActual) {
@@ -240,15 +207,9 @@
                             tiempoActual++;
                         }
                     }
-
                     representarGraficamente(planificacion);
-
-
                     mostrarRegistroDeEjecucion();
-
                 }
-
-
                 function representarGraficamente(planificacion) {
                     const chart = document.getElementById('chart');
                     chart.innerHTML = '';
@@ -261,14 +222,11 @@
                         chart.appendChild(div);
                     }
                 }
-
-
                 function copiarTiemposALaSegundaPagina() {
                     const tiemposLlegada = [];
                     const tiemposCPU = [];
                     const tiemposFinales = [];
                     const filasTabla1 = document.querySelectorAll("table tbody tr");
-
                     filasTabla1.forEach((fila) => {
                         const tiempoLlegada = fila.querySelector("td input[id^='TiempoLlegada']").value;
                         const tiempoCPU = fila.querySelector("td input[id^='TiempoCPU']").value;
@@ -277,27 +235,17 @@
                         tiemposCPU.push(tiempoCPU);
                         tiemposFinales.push(tiempoFinal);
                     });
-
                     const tiemposLlegadaJSON = JSON.stringify(tiemposLlegada);
                     const tiemposCPUJSON = JSON.stringify(tiemposCPU);
                     const tiemposFinalesJSON = JSON.stringify(tiemposFinales);
-
                     localStorage.setItem("tiemposLlegada", tiemposLlegadaJSON);
                     localStorage.setItem("tiemposCPU", tiemposCPUJSON);
                     localStorage.setItem("tiemposFinales", tiemposFinalesJSON);
-
                     window.location.href = "tabla.html";
                 }
-
             </script>
         </body>
     </main>
-
-
-    <footer>
-
-    </footer>
-
+    <footer></footer>
 </body>
-
 </html>

@@ -1,9 +1,6 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
     <title>Proyecto planificacion de procesos</title>
@@ -12,28 +9,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
-
-
 </head>
-
 <body>
-
     <header>
         <div>
             <img src="logo.png" class="logo">
             <li class="nombre">Kevin Rafael Ovalle Lemus 1490-21-3972</li>
-
-
         </div>
-
     </header>
-
-
     <main>
-
         <body>
             <h1 class="titulo"><strong>Planificación de Procesos</strong></h1>
-
             <table class="table-d" id="t">
                 <thead>
                     <tr>
@@ -44,7 +30,6 @@
                         <th>Tiempo retorno</th>
                         <th>Tiempo espera</th>
                         <th>Tiempo promedio</th>
-
                     </tr>
                 </thead>
                 <tbody>
@@ -123,7 +108,6 @@
                 </tbody>
             </table>
             </div>
-
             <script>
                 const tiemposLlegadaJSON = localStorage.getItem("tiemposLlegada");
                 const tiemposCPUJSON = localStorage.getItem("tiemposCPU");
@@ -172,7 +156,6 @@
 
                 window.addEventListener("load", calcularTiempos);
 
-
                 function calcularPromedios() {
                     const filasTabla = document.querySelectorAll("table#t tbody tr");
                     const numColumnas = 7;
@@ -220,20 +203,11 @@
                         filasTabla[numFilas - 1].querySelector(`td:nth-child(${numColumnas})`).textContent = promedio.toFixed(2);
                     }
                 }
-
                 calcularTiempos();
                 calcularPromedios();
-
-
             </script>
         </body>
     </main>
-
-
-    <footer>
-
-    </footer>
-
+    <footer></footer>
 </body>
-
 </html>

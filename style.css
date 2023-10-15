@@ -98,34 +98,23 @@ footer{
    
 }
 
-
-
 .table-d {
     border-collapse: collapse;
     width: 100%;
     margin-bottom: 120px;
 }
 
-/* Estilos para las celdas de la tabla */
 .table-d td, .table-d th {
-    border: 1px solid #000; /* Borde sólido de 1 píxel, puedes ajustar el color y el grosor */
-    padding: 8px; /* Espacio interno para el contenido de la celda */
-    text-align: left; /* Alineación del texto (izquierda) */
+    border: 1px solid #000;
+    padding: 8px; 
+    text-align: left; 
 }
 
-/* Estilo para resaltar la primera fila (opcional) */
 .table-d thead:first-child {
-    background-color: #f2f2f2; /* Color de fondo para la primera fila */
-    font-weight: bold; /* Texto en negrita */
+    background-color: #f2f2f2; 
+    font-weight: bold; 
 }
 
 .table-c{
     font-weight: bold;
 }
-
-
-
-
-
-
-
