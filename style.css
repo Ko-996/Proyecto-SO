@@ -1,0 +1,131 @@
+header{
+    background-color: #12527c;
+    padding: 45px 0;
+}
+
+.logo{
+    position: absolute;
+    top: 13px; 
+    left: 12px; 
+    max-width: 90px; 
+    height: 80px;
+    
+}
+
+.nombre{
+    color: #e7e9ef;
+    font-weight: bold;
+    font-size: 20px;
+    display: inline;
+    position: absolute;
+    top: 40px;
+    right: 15px;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.titulo{
+    text-align: center;
+    
+}
+
+.titulo1{
+    text-align: center;
+    margin-left: 35px;
+}
+
+.tab{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+
+.proceso {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    
+    margin-right: 5px;
+    
+}
+
+.bt{
+    width: 100%;
+    padding:0px;
+    bottom: 180px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center; 
+}
+
+.btn{
+    width: 300px;
+    padding: 20px; 
+    border-radius: 24px;
+    background: var(--light-blue-light-blue-100, #F3F5FC);
+    border: 1px solid var(--dark-blue-dark-blue-300, #0A3871);
+    color: var(--dark-blue-dark-blue-300, #0A3871);
+    text-align: center;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    transition: background-color 0.3s, transform 0.3s;
+    margin-top: 30px;
+    margin-bottom: 50px;
+    margin-left: 35px;
+    
+}
+
+.btn:active {
+    background-color: var(--light-blue-light-blue-100, #e7e9ef);
+    transform: scale(0.95);
+  }
+
+footer{
+    
+    background-color: #12527c;
+    padding: 40px;
+    
+   
+}
+
+
+
+.table-d {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 120px;
+}
+
+/* Estilos para las celdas de la tabla */
+.table-d td, .table-d th {
+    border: 1px solid #000; /* Borde sólido de 1 píxel, puedes ajustar el color y el grosor */
+    padding: 8px; /* Espacio interno para el contenido de la celda */
+    text-align: left; /* Alineación del texto (izquierda) */
+}
+
+/* Estilo para resaltar la primera fila (opcional) */
+.table-d thead:first-child {
+    background-color: #f2f2f2; /* Color de fondo para la primera fila */
+    font-weight: bold; /* Texto en negrita */
+}
+
+.table-c{
+    font-weight: bold;
+}
+
+
+
+
+
+
+

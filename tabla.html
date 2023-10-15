@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Proyecto planificacion de procesos</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+    <header>
+        <div>
+            <img src="logo.png" class="logo">
+            <li class="nombre">Kevin Rafael Ovalle Lemus 1490-21-3972</li>
+
+
+        </div>
+
+    </header>
+
+
+    <main>
+
+        <body>
+            <h1 class="titulo"><strong>Planificación de Procesos</strong></h1>
+
+            <table class="table-d" id="t">
+                <thead>
+                    <tr>
+                        <th>Procesos</th>
+                        <th>Tiempo de Llegada</th>
+                        <th>Tiempo de CPU</th>
+                        <th>Tiempo final</th>
+                        <th>Tiempo retorno</th>
+                        <th>Tiempo espera</th>
+                        <th>Tiempo promedio</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="table-c">A</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="table-c">B</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="table-c">C</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="table-c">D</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="table-c">E</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="table-c">F</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="table-c">G</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td class="table-c">Promedios</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+
+            <script>
+                const tiemposLlegadaJSON = localStorage.getItem("tiemposLlegada");
+                const tiemposCPUJSON = localStorage.getItem("tiemposCPU");
+                const tiemposFinalesJSON = localStorage.getItem("tiemposFinales");
+
+                if (tiemposLlegadaJSON && tiemposCPUJSON && tiemposFinalesJSON) {
+                    const tiemposLlegada = JSON.parse(tiemposLlegadaJSON);
+                    const tiemposCPU = JSON.parse(tiemposCPUJSON);
+                    const tiemposFinales = JSON.parse(tiemposFinalesJSON);
+
+                    const filasTabla2 = document.querySelectorAll("table#t tbody tr");
+
+                    tiemposLlegada.forEach((tiempo, index) => {
+                        filasTabla2[index].querySelector("td:nth-child(2)").textContent = tiempo;
+                    });
+
+                    tiemposCPU.forEach((tiempo, index) => {
+                        filasTabla2[index].querySelector("td:nth-child(3)").textContent = tiempo;
+                    });
+
+                    tiemposFinales.forEach((tiempo, index) => {
+                        filasTabla2[index].querySelector("td:nth-child(4)").textContent = tiempo;
+                    });
+                }
+
+
+                function calcularTiempos() {
+                    const filasTabla = document.querySelectorAll("table#t tbody tr");
+
+                    filasTabla.forEach((fila) => {
+                        const tiempoLlegada = parseInt(fila.querySelector("td:nth-child(2)").textContent);
+                        const tiempoCPU = parseInt(fila.querySelector("td:nth-child(3)").textContent);
+                        const tiempoFinal = parseInt(fila.querySelector("td:nth-child(4)").textContent);
+
+                        if (!isNaN(tiempoLlegada) && !isNaN(tiempoCPU) && !isNaN(tiempoFinal)) {
+                            const tiempoRetorno = tiempoFinal - tiempoLlegada;
+                            const tiempoEspera = tiempoRetorno - tiempoCPU;
+                            const tiempoPromedio = tiempoRetorno / tiempoCPU;
+
+                            fila.querySelector("td:nth-child(5)").textContent = tiempoRetorno;
+                            fila.querySelector("td:nth-child(6)").textContent = tiempoEspera;
+                            fila.querySelector("td:nth-child(7)").textContent = tiempoPromedio.toFixed(2);
+                        }
+                    });
+                }
+
+                window.addEventListener("load", calcularTiempos);
+
+
+                function calcularPromedios() {
+                    const filasTabla = document.querySelectorAll("table#t tbody tr");
+                    const numColumnas = 7;
+                    const numFilas = filasTabla.length;
+
+                    if (numFilas > 1) {
+                        let suma = 0;
+                        for (let fila = 0; fila < numFilas - 1; fila++) {
+                            const valor = parseFloat(filasTabla[fila].querySelector(`td:nth-child(3)`).textContent);
+                            suma += valor;
+                        }
+                        const promedio = suma / (numFilas - 1);
+                        filasTabla[numFilas - 1].querySelector(`td:nth-child(3)`).textContent = promedio.toFixed(2);
+                    } if (numFilas > 1) {
+                        let suma = 0;
+                        for (let fila = 0; fila < numFilas - 1; fila++) {
+                            const valor = parseFloat(filasTabla[fila].querySelector(`td:nth-child(4)`).textContent);
+                            suma += valor;
+                        }
+                        const promedio = suma / (numFilas - 1);
+                        filasTabla[numFilas - 1].querySelector(`td:nth-child(4)`).textContent = promedio.toFixed(2);
+                    } if (numFilas > 1) {
+                        let suma = 0;
+                        for (let fila = 0; fila < numFilas - 1; fila++) {
+                            const valor = parseFloat(filasTabla[fila].querySelector(`td:nth-child(5)`).textContent);
+                            suma += valor;
+                        }
+                        const promedio = suma / (numFilas - 1);
+                        filasTabla[numFilas - 1].querySelector(`td:nth-child(5)`).textContent = promedio.toFixed(2);
+                    } if (numFilas > 1) {
+                        let suma = 0;
+                        for (let fila = 0; fila < numFilas - 1; fila++) {
+                            const valor = parseFloat(filasTabla[fila].querySelector(`td:nth-child(6)`).textContent);
+                            suma += valor;
+                        }
+                        const promedio = suma / (numFilas - 1);
+                        filasTabla[numFilas - 1].querySelector(`td:nth-child(6)`).textContent = promedio.toFixed(2);
+                    } if (numFilas > 1) {
+                        let suma = 0;
+                        for (let fila = 0; fila < numFilas - 1; fila++) {
+                            const valor = parseFloat(filasTabla[fila].querySelector(`td:nth-child(${numColumnas})`).textContent);
+                            suma += valor;
+                        }
+                        const promedio = suma / (numFilas - 1);
+                        filasTabla[numFilas - 1].querySelector(`td:nth-child(${numColumnas})`).textContent = promedio.toFixed(2);
+                    }
+                }
+
+                calcularTiempos();
+                calcularPromedios();
+
+
+            </script>
+        </body>
+    </main>
+
+
+    <footer>
+
+    </footer>
+
+</body>
+
+</html>
